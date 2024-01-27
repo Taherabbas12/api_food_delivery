@@ -1,18 +1,21 @@
 <?php
 include "../connect.php";
-$username = filterRequest("user_name");
+$email = filterRequest("email");
 $password = filterRequest("password");
 
-$stmt = $con->prepare("SELECT * FROM admin WHERE password= ?  AND user_name= ?");
+$stmt = $con->prepare("SELECT name,email,phone FROM admin WHERE password= ?  AND email= ?");
 
 
-$stmt->execute(array($password, $username));
+$stmt->execute(array($password, $email));
+ 
 
 $count = $stmt->rowCount();
 
 
 if ($count > 0) {
-    echo json_encode(array("status" => "success", array($stmt["id"])));
+
+$data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    echo json_encode(array("status" => "success" ,"data"=>$data));
 } else {
 
     echo json_encode(array("status" => "fail"));

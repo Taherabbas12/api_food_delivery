@@ -5,22 +5,22 @@ function filterRequest($requestname)
 }
 
 
- function uploadImage($file)
+ function uploadImage($file,$name)
 {
     // تحديد مسار المجلد لتخزين الصور داخل المشروع
-    $uploadDir = __DIR__ . '/uploads/';
+    $uploadDir = '../uploads/' . $name . '/';
 
     // التحقق من نوع الصورة
-    $allowedTypes = array("image/jpeg", "image/png", "image/gif");
+    $allowedTypes = array("image/jpeg", "image/png", "image/gif","image/jpg",);
     if (!in_array($file['type'], $allowedTypes)) {
         return false; // نوع الصورة غير مسموح
     }
 
-    // التحقق من حجم الصورة (حدد الحجم حسب احتياجاتك)
-    $maxFileSize = 5 * 1024 * 1024; // 5 MB
-    if ($file['size'] > $maxFileSize) {
-        return false; // حجم الصورة كبير جداً
-    }
+    // // التحقق من حجم الصورة (حدد الحجم حسب احتياجاتك)
+    // $maxFileSize = 5 * 1024 * 1024; // 5 MB
+    // if ($file['size'] > $maxFileSize) {
+    //     return false; // حجم الصورة كبير جداً
+    // }
 
     // معالجة الصورة (يمكنك إضافة معالجة إضافية هنا)
 
@@ -47,13 +47,13 @@ function filterRequest($requestname)
 function uploadAndCompressImage($file,$name)
 {
     // تحديد مسار المجلد لتخزين الصور داخل المشروع
-    $uploadDir =  '../uploads/' . $name . '/';
+    $uploadDir = '../uploads/' . $name . '/';
 
     // التحقق من نوع الصورة
-    $allowedTypes = array("image/jpeg", "image/png", "image/gif");
-    if (!in_array($file['type'], $allowedTypes)) {
-        return false; // نوع الصورة غير مسموح
-    }
+    // $allowedTypes = array("image/jpeg", "image/png", "image/gif");
+    // if (!in_array($file['type'], $allowedTypes)) {
+    //     return false; // نوع الصورة غير مسموح
+    // }
 
     // التحقق من حجم الصورة (حدد الحجم حسب احتياجاتك)
     $maxFileSize = 5 * 1024 * 1024; // 5 MB
@@ -99,6 +99,34 @@ function uploadAndCompressImage($file,$name)
     return $targetPath; // إرجاع المسار الذي تم حفظ الصورة فيه داخل المشروع
 }
 
-?>
 
- 
+
+define("MB",1048576);
+function uploadImage2($imageRequest){
+    global $msgError;
+    $imageName = rand(1000,10000).$_FILES[$imageRequest]['name'];
+    $imageTmp =$_FILES[$imageRequest]['tmp_name'];
+    $imageSize =$_FILES[$imageRequest]['size'];
+    $allowExt  =array("jpg","png","gif","mp3","pdf");
+    $strToArray = explode(".",$imageName);
+    $ext        = end($strToArray);
+    $ext        =strtolower($ext);
+    if(!empty($imageName)&&!in_array($ext ,$allowExt)){
+        $msgError[]="Ext";
+    }
+    // if($imageSize>5 & MB){
+    //     $msgError="Size";
+    // }
+    if(empty($msgError)){
+        move_uploaded_file($imageTmp,"../uploads/".$imageName);
+        return "uploads/".$imageName;
+    }
+    else {
+        return "fail";
+        echo "<pre>";
+        print_r($msgError);
+        echo "</pre>";
+    }
+}
+
+?>

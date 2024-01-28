@@ -1,7 +1,7 @@
 <?php
 include "../connect.php";
 $name = filterRequest("name");
-$image = uploadImage($_FILES['file']);
+$image = uploadImage2('file');
 
 
 $stmt = $con->prepare("INSERT INTO category SET name= ? , image=?");

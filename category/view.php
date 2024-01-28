@@ -2,7 +2,7 @@
 include "../connect.php";
 
 
-$stmt = $con->prepare("SELECT * FROM `admin`");
+$stmt = $con->prepare("SELECT * FROM `category`");
 
 
 $stmt->execute();

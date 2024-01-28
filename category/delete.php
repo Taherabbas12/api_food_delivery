@@ -4,7 +4,7 @@ $id = filterRequest("id");
 
 
 
-$stmt = $con->prepare("DELETE FROM students WHERE id= ?");
+$stmt = $con->prepare("DELETE FROM category WHERE id= ?");
 
 
 $stmt->execute(array($id));

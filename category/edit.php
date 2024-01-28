@@ -2,14 +2,14 @@
 include "../connect.php";
 $id = filterRequest("id");
 $name = filterRequest("name");
-$age = filterRequest("age");
-$department = filterRequest("department");
+$image = uploadImage($_FILES["file"]);
+ 
 
 
-$stmt = $con->prepare("UPDATE students SET name= ? , age=? , department=? WHERE id=?");
+$stmt = $con->prepare("UPDATE category SET name= ? , image=?  WHERE id=?");
 
 
-$stmt->execute(array($name, $age, $department, $id));
+$stmt->execute(array($name, $image, $id));
 
 $count = $stmt->rowCount();
 

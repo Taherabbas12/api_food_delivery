@@ -107,25 +107,64 @@ function uploadImage2($imageRequest){
     $imageName = rand(1000,10000).$_FILES[$imageRequest]['name'];
     $imageTmp =$_FILES[$imageRequest]['tmp_name'];
     $imageSize =$_FILES[$imageRequest]['size'];
-    $allowExt  =array("jpg","png","gif","mp3","pdf");
+    // $allowExt  =array("jpg","png","gif","mp3","pdf");
     $strToArray = explode(".",$imageName);
     $ext        = end($strToArray);
     $ext        =strtolower($ext);
-    if(!empty($imageName)&&!in_array($ext ,$allowExt)){
-        $msgError[]="Ext";
-    }
+    // if(!empty($imageName)&&!in_array($ext ,$allowExt)){
+    //     $msgError[]="Ext";
+    // }
     // if($imageSize>5 & MB){
     //     $msgError="Size";
     // }
     if(empty($msgError)){
-        move_uploaded_file($imageTmp,"../uploads/".$imageName);
-        return "uploads/".$imageName;
+        move_uploaded_file($imageTmp,"../uploads/food/".$imageName);
+        return "uploads/food/".$imageName;
     }
     else {
         return "fail";
         echo "<pre>";
         print_r($msgError);
         echo "</pre>";
+    }
+}
+
+
+function uploadImages($imageRequests){
+    global $msgError;
+    $uploadedImages = array();
+
+    foreach ($imageRequests['name'] as $key => $imageName) {
+        $imageName = rand(1000, 10000) . $imageName;
+        $imageTmp = $imageRequests['tmp_name'][$key];
+        $imageSize = $imageRequests['size'][$key];
+        $allowExt = array("jpg", "png", "gif", "mp3", "pdf");
+        $strToArray = explode(".", $imageName);
+        $ext = end($strToArray);
+        $ext = strtolower($ext);
+
+        if (!empty($imageName) && !in_array($ext, $allowExt)) {
+            $msgError[] = "Ext";
+        }
+        
+        if ($imageSize > 5 * MB) {
+            $msgError[] = "Size";
+        }
+
+        if (empty($msgError)) {
+            $uploadPath = "../uploads/food/" . $imageName;
+            move_uploaded_file($imageTmp, $uploadPath);
+            $uploadedImages[] = $uploadPath;
+        }
+    }
+
+    if (!empty($msgError)) {
+        return "fail";
+        echo "<pre>";
+        print_r($msgError);
+        echo "</pre>";
+    } else {
+        return $uploadedImages;
     }
 }
 

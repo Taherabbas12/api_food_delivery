@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 31, 2024 at 01:31 PM
+-- Generation Time: Feb 12, 2024 at 12:04 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.30
 
@@ -75,6 +75,16 @@ CREATE TABLE `images` (
   `url_image` varchar(200) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `images`
+--
+
+INSERT INTO `images` (`id`, `id_items`, `url_image`) VALUES
+(11, 21, 'uploads\\food\\2698download.jpg'),
+(12, 21, 'uploads\\food\\2698download.jpg'),
+(13, 22, 'uploads\\food\\2698download.jpg'),
+(14, 22, 'uploads\\food\\2698download.jpg');
+
 -- --------------------------------------------------------
 
 --
@@ -89,6 +99,14 @@ CREATE TABLE `menuitems` (
   `Category` int(2) NOT NULL,
   `isAvailable` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `menuitems`
+--
+
+INSERT INTO `menuitems` (`MenuItemID`, `Name`, `Description`, `Price`, `Category`, `isAvailable`) VALUES
+(21, 'تفاح', 'تفاح', 1500, 1, 0),
+(22, 'كباب', 'نفر كباب 4 قطع', 20000, 2, 0);
 
 -- --------------------------------------------------------
 
@@ -210,13 +228,13 @@ ALTER TABLE `category`
 -- AUTO_INCREMENT for table `images`
 --
 ALTER TABLE `images`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `menuitems`
 --
 ALTER TABLE `menuitems`
-  MODIFY `MenuItemID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `MenuItemID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `menuitemsclient`

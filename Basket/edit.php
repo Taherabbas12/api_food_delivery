@@ -1,15 +1,14 @@
 <?php
 include "../connect.php";
-$id = filterRequest("id");
-$name = filterRequest("name");
-$age = filterRequest("age");
-$department = filterRequest("department");
+$menuitemsclientID = filterRequest("menuitemsclientID");
+ 
+ 
+
+ 
+$stmt = $con->prepare("UPDATE menuitemsclient SET  received_date='قيد الانتضار' WHERE menuitemsclientID=?");
 
 
-$stmt = $con->prepare("UPDATE students SET name= ? , age=? , department=? WHERE id=?");
-
-
-$stmt->execute(array($name, $age, $department, $id));
+$stmt->execute(array($menuitemsclientID));
 
 $count = $stmt->rowCount();
 

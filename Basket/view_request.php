@@ -3,7 +3,7 @@ include "../connect.php";
 
 $ClientID = filterRequest("ClientID");
  
-$stmt = $con->prepare("SELECT * FROM `menuitemsclient` where ClientID=? and received_date='في السله'");
+$stmt = $con->prepare("SELECT * FROM `menuitemsclient` where ClientID=? and received_date='قيد الانتضار'");
 
 
 $stmt->execute(array($ClientID));

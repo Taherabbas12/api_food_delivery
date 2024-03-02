@@ -2,7 +2,7 @@
 include "../connect.php";
 
 
-$stmt = $con->prepare("SELECT * FROM `items_table`");
+$stmt = $con->prepare("SELECT * FROM `menuitemsclient`");
 
 
 $stmt->execute();
